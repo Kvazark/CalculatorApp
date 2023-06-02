@@ -1,5 +1,6 @@
 ﻿using CalculatorApp.Models;
 using CalculatorApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatorApp.Controllers;
@@ -47,6 +48,7 @@ public class CalculatorController : ControllerBase
         return Ok(result.Result);
     }
 
+    [Authorize]
     [HttpGet("pow")]
     public async Task<ActionResult> Pow(double num1, double num2)
     {
@@ -54,6 +56,7 @@ public class CalculatorController : ControllerBase
         return Ok(result.Result);
     }
 
+    [Authorize(Roles = "Admin")] 
     [HttpGet("extractTheRoot")]
     public async Task<ActionResult> ExtractTheRoot(double num1, double num2)
     {
@@ -61,6 +64,7 @@ public class CalculatorController : ControllerBase
         return Ok(result.Result);
     }
 
+    [Authorize(Roles = "Admin")] 
     [HttpGet("equation")]
     public async Task<ActionResult> Equation(string line)
     {
